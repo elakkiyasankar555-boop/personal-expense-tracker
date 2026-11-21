@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% block title %}Add Expense{% endblock %}
+
+{% block content %}
+<div class="form-card">
+    <h1>Add Expense</h1>
+
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <label>Expense Title</label>
+        <input type="text" name="title" maxlength="100"
+               value="{{ values.title }}" required>
+
+        <label>Amount (₹)</label>
+        <input type="number" name="amount" min="0.01"
+               max="1000000000" step="0.01"
+               value="{{ values.amount }}" required>
+
+        <label>Date</label>
+        <input type="date" name="date"
+               value="{{ values.date }}"
+               max="{{ current_year }}-12-31" required>
+
+        <label>Description</label>
+        <textarea name="description" maxlength="500">{{ values.description }}</textarea>
+
+        <button class="btn danger" type="submit">Save Expense</button>
+        <a href="{{ url_for('dashboard') }}" class="btn secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

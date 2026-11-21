@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Login | Expense Tracker{% endblock %}
+
+{% block content %}
+
+<div class="auth-card">
+    <h1>Welcome Back!</h1>
+    <p>Login to manage your expenses</p>
+
+    <form method="POST">
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <label>Email Address</label>
+        <input type="email"
+               name="email"
+               placeholder="Enter your email"
+               required>
+
+        <label>Password</label>
+        <input type="password"
+               name="password"
+               placeholder="Enter your password"
+               required>
+
+        <button type="submit" class="btn">
+            Login
+        </button>
+
+    </form>
+
+    <p>Don't have an account?
+        <a href="{{ url_for('register') }}">Register</a>
+    </p>
+</div>
+
+{% endblock %}

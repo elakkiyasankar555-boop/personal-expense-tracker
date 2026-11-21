@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | Expense Tracker{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h1>Dashboard</h1>
+    <p>Welcome, {{ session.get('user_name') }}!</p>
+
+    <h2>Overall Summary</h2>
+
+    <div class="cards">
+
+        <div class="card income">
+            <h3>Total Income</h3>
+            <h2>{{ total_income | money }}</h2>
+        </div>
+
+        <div class="card expense">
+            <h3>Total Expenses</h3>
+            <h2>{{ total_expenses | money }}</h2>
+        </div>
+
+        <div class="card balance">
+            <h3>Available Balance</h3>
+            <h2>{{ balance | money }}</h2>
+        </div>
+
+    </div>
+
+    <h2>{{ month_name }} Summary</h2>
+
+    <div class="cards">
+
+        <div class="card income">
+            <h3>Monthly Income</h3>
+            <h2>{{ month_income | money }}</h2>
+        </div>
+
+        <div class="card expense">
+            <h3>Monthly Expenses</h3>
+            <h2>{{ month_expense | money }}</h2>
+        </div>
+
+        <div class="card balance">
+            <h3>Monthly Balance</h3>
+            <h2>{{ month_balance | money }}</h2>
+        </div>
+
+    </div>
+
+    <h2>Quick Actions</h2>
+
+<div class="actions">
+
+    <a class="btn" href="{{ url_for('add_transaction', kind='income') }}">
+        + Add Income
+    </a>
+
+    <a class="btn danger" href="{{ url_for('add_transaction', kind='expense') }}">
+        + Add Expense
+    </a>
+
+    <a class="btn secondary" href="{{ url_for('transactions') }}">
+        View Transactions
+    </a>
+
+    <a class="btn secondary" href="{{ url_for('reports') }}">
+        View Reports
+    </a>
+
+</div>
+
+    <h2>Recent Transactions</h2>
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for item in recent %}
+
+                <tr>
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.kind | capitalize }}</td>
+                    <td>{{ item.amount | money }}</td>
+                    <td>{{ item.date }}</td>
+                </tr>
+
+                {% else %}
+
+                <tr>
+                    <td colspan="5">No transactions yet.</td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
