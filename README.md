@@ -42,8 +42,7 @@ The Personal Expense Tracker helps users manage their personal finances by recor
    `python app.py`
 
 7. Open your browser and visit:
-   `http://127.0.0.1:5000`
-
+   `https://personal-expense-tracker-ahbw.onrender.com'
 ## Project Purpose
 This project was developed to practice Python web development, database management, and frontend design.
 
